@@ -1,0 +1,15 @@
+{
+  "name": "1-homework",
+  "version": "1.0.0",
+  "description": "โปรเจ็กต์นี้ใช้ CRUD พื้นฐาน (Create, Read, Update, Delete) โดยใช้เฟรมเวิร์ก Express.js ใน Node.js",
+  "main": "homework.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
