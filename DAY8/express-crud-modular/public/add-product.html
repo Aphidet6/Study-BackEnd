@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>เพิ่มสินค้าใหม่</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="main-nav">
+        <h1>เพิ่มสินค้าใหม่</h1>
+        <a href="/" class="nav-button">กลับไปหน้าแสดงสินค้า</a>
+      </nav>
+
+      <div class="add-product-form">
+        <form id="productForm" onsubmit="addProduct(event)">
+          <input
+            type="text"
+            id="productName"
+            placeholder="ชื่อสินค้า"
+            required
+          />
+          <input type="number" id="productPrice" placeholder="ราคา" required />
+          <input
+            type="number"
+            id="productDiscount"
+            placeholder="ส่วนลด"
+            required
+          />
+          <input
+            type="number"
+            id="productReviewCount"
+            placeholder="จำนวนรีวิว"
+            required
+          />
+          <input
+            type="text"
+            id="productImageUrl"
+            placeholder="URL รูปภาพ"
+            required
+          />
+          <button type="submit">เพิ่มสินค้า</button>
+        </form>
+      </div>
+    </div>
+    <script src="add-product.js"></script>
+  </body>
+</html>

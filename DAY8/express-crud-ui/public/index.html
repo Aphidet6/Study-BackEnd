@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ระบบจัดการสินค้า</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <nav class="main-nav">
+        <h1>ระบบจัดการสินค้า</h1>
+        <a href="/add-product.html" class="nav-button">เพิ่มสินค้าใหม่</a>
+      </nav>
+
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="ค้นหาสินค้า..." />
+        <button onclick="searchProducts()">ค้นหา</button>
+      </div>
+
+      <div class="products-grid" id="productsGrid">
+        <!-- สินค้าจะถูกเพิ่มที่นี่ด้วย JavaScript -->
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
