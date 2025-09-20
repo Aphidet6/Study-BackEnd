@@ -15,6 +15,6 @@ app.use(cors());
 app.use("/auth", authRoutes);
 app.use("/protected", protectedRoutes);
 
-app.listen(4000, () => {
+app.listen(3000, () => {
   console.log("App listening on port 3000!");
 });

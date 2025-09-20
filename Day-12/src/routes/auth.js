@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const speakeasy = require('speakeasy');
 const QRCode = require('qrcode');
+const rateLimit = require('express-rate-limit');
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -11,6 +12,12 @@ const prisma = new PrismaClient();
 function generateToken(payload) {
     return jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
 }
+
+const loginLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 5, // limit each IP to 5 requests per windowMs
+    message: 'Too many login attempts from this IP, please try again after 15 minutes'
+});
 
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
@@ -35,18 +42,18 @@ router.post('/register', async (req, res) => {
         return res.json({ message: 'User registered successfully', user: { email: user.email} });
     });
 
-    router.post('/login', async (req, res) => {
-        const { email, password, token } = req.body;
+    router.post('/login', loginLimiter, async (req, res) => {
+        const { email, password, token2fa } = req.body;
         const user = await prisma.user.findUnique({ where: { email } });
         if (!user) return res.status(400).json({ message: 'Invalid email or password' });
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ message: 'Invalid email or password' });
         if (user.twoFactorEnabled) {
-            if (!token) return res.status(400).json({ message: '2FA token is required' });
+            if (!token2fa) return res.status(401).json({ message: '2FA token is required' });
             const verified = speakeasy.totp.verify({
                 secret: user.twoFactorSecret,
                 encoding: 'base32',
-                token: token
+                token: token2fa
             });
             if (!verified) return res.status(401).json({ message: 'Invalid 2FA token' });
         }
