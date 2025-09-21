@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const authRoutes = require("./routes/auth");
 const protectedRoutes = require("./routes/protected");
+const productRoutes = require("./routes/products");
 
 const app = express();
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use("/auth", authRoutes);
 app.use("/protected", protectedRoutes);
+app.use("/api/products", productRoutes);
 
 app.listen(3000, () => {
   console.log("App listening on port 3000!");
