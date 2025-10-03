@@ -1,0 +1,17 @@
+# Environment variables
+.env
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# SonarQube
+.sonar/
+.scannerwork/
+
+# OS generated files
+.DS_Store
+Thumbs.db
