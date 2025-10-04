@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME, DB_PORT } = require('./env');
-const logger = require('../utils/logger');
+const logger = require('../untils/logger');
 const pool = mysql.createPool({
     host: DB_HOST,
     user: DB_USER,
@@ -15,10 +15,11 @@ const pool = mysql.createPool({
 (async () => {
     try {
         const connection = await pool.getConnection();
-        logger.log('Database connected successfully');
+        logger.info('Database connected successfully');
         connection.release();
     } catch (error) {
-        logger.error('Database connection failed:', error);
+        // pass structured info to winston (message + meta)
+        logger.error('Database connection failed', { error: error });
     }
 
 })();

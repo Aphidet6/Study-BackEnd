@@ -1,5 +1,5 @@
 const pool = require('../config/db');
-const logger = require('../utils/logger');
+const logger = require('../untils/logger');
 
 const getAllUsers = async (req, res) => {
     try {
